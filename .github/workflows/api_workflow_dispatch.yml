@@ -1,11 +1,10 @@
 name: Workflow dispatch via API
 
-on:
-    workflow_dispatch:
+on: workflow_dispatch
 
 jobs:
   release:
-    name: Release
+    name: Echo to console
     runs-on: ubuntu-latest
     timeout-minutes: 10
     steps:

@@ -1,0 +1,12 @@
+name: Workflow dispatch via API
+
+on:
+    workflow_dispatch:
+
+jobs:
+  release:
+    name: Release
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+        - run: echo "Workflow ran successfully!!!"

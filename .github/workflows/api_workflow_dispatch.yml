@@ -1,11 +1,16 @@
-name: Workflow dispatch via API
+name: Capture Custom Payload
 
-on: workflow_dispatch
+on:
+  repository_dispatch:
+    types: [update-tokens]
 
 jobs:
-  release:
-    name: Echo to console
+  capture_payload:
+    name: Capture and Echo Payload
     runs-on: ubuntu-latest
-    timeout-minutes: 10
     steps:
-        - run: echo "Workflow ran successfully!!!"
+      - name: Echo Event Type
+        run: echo "Event Type: ${{ github.event.action }}"
+      
+      - name: Echo Client Payload
+        run: echo "Client Payload: ${{ toJson(github.event.client_payload) }}"

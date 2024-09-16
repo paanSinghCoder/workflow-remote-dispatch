@@ -20,8 +20,8 @@ jobs:
         with:
           node-version: '20.16.0'
 
-      - name: Clear npm Cache
-        run: npm cache clean --force
+      # - name: Clear npm Cache
+      #   run: npm cache clean --force
 
       - name: Create Branch
         id: create_branch
@@ -34,12 +34,11 @@ jobs:
       - name: Update Tokens JSON
         run: |
           echo "Updating tokens/tokens.json with new tokens..."
-          printf '%s' "${{ toJson(github.event.client_payload.tokens) }}" > tokens/tokens.json
+          echo '${{ toJson(github.event.client_payload.tokens) }}' | jq '.' > tokens/tokens.json
         
       - name: Echo Client Payload
         run: |
           cat tokens/tokens.json
-
 
       - name: Run NPM Install 
         run: |

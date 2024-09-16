@@ -43,21 +43,9 @@ jobs:
           git push origin ${{ steps.create_branch.outputs.branch }}
 
       - name: Create Pull Request
-        uses: actions/github-script@v6
+        uses: peter-evans/create-pull-request@v3
         with:
-          script: |
-            const branch = '${{ steps.create_branch.outputs.branch }}';
-            const title = 'Update tokens from GitHub event payload';
-            const body = 'This PR updates the tokens based on the latest Figma payload.';
-            const base = 'main'; // Change this to your default branch if it's not 'main'
-
-            const response = await github.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title,
-              head: branch,
-              base,
-              body,
-            });
-
-            console.log(`Pull request created: ${response.data.html_url}`);
+          title: "Update tokens from GitHub event payload"
+          body: "This PR updates the tokens based on the latest Figma payload."
+          head: ${{ steps.create_branch.outputs.branch }}
+          base: main

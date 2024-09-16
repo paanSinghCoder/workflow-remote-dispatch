@@ -28,11 +28,14 @@ jobs:
         run: |
           echo "${{ toJson(github.event.client_payload) }}"
 
+      - name: Debug New Tokens
+        run: |
+          echo "New Tokens: ${{ toJson(github.event.client_payload.tokens) }}"
+
       - name: Update Tokens JSON
         run: |
           echo "Updating tokens/tokens.json with new tokens..."
-          jq --argjson newTokens "${{ toJson(github.event.client_payload.tokens) }}" \
-             '.color += $newTokens.color' tokens/tokens.json > tokens/tokens.tmp.json && mv tokens/tokens.tmp.json tokens/tokens.json
+          echo "${{ toJson(github.event.client_payload.tokens) }}" | jq '.color += .color' tokens/tokens.json > tokens/tokens.tmp.json && mv tokens/tokens.tmp.json tokens/tokens.json
 
       - name: Commit Changes
         run: |

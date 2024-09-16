@@ -46,15 +46,15 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { owner, repo } = context.repo;
+            const { github, context } = require('@actions/github');
             const branch = '${{ steps.create_branch.outputs.branch }}';
             const title = 'Update tokens from GitHub event payload';
             const body = 'This PR updates the tokens based on the latest Figma payload.';
             const base = 'main'; // Change this to your default branch if it's not 'main'
 
             const response = await github.pulls.create({
-              owner,
-              repo,
+              owner: context.repo.owner,
+              repo: context.repo.repo,
               title,
               head: branch,
               base,

@@ -46,18 +46,19 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
+            const { owner, repo } = context.repo;
             const branch = '${{ steps.create_branch.outputs.branch }}';
             const title = 'Update tokens from GitHub event payload';
             const body = 'This PR updates the tokens based on the latest Figma payload.';
-            const base = 'main';
+            const base = 'main'; // Change this to your default branch if it's not 'main'
 
             const response = await github.pulls.create({
-              owner: context.repo.owner,
-              repo: context.repo.repo,
-              title: title,
+              owner,
+              repo,
+              title,
               head: branch,
-              base: base,
-              body: body,
+              base,
+              body,
             });
 
             console.log(`Pull request created: ${response.data.html_url}`);

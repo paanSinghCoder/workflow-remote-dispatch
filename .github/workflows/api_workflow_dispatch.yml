@@ -34,7 +34,7 @@ jobs:
       - name: Update Tokens JSON
         run: |
           echo "Updating tokens/tokens.json with new tokens..."
-          echo "${{ toJson(github.event.client_payload.tokens) }}" | jq . > tokens/tokens.json
+          echo "${{ github.event.client_payload.tokens }}" | jq . > tokens/tokens.json
 
       - name: Echo Client Payload
         run: |

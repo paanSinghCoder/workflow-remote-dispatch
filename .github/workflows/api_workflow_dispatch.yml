@@ -12,9 +12,6 @@ jobs:
       - name: Echo Event Type
         run: 'echo "Event Type: ${{ github.event.action }}"'
       
-      - name: Echo Client Payload
-        run: 'echo "Client Payload: ${{ toJson(github.event.client_payload) }}"'
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -38,6 +35,10 @@ jobs:
         run: |
           echo "Updating tokens/tokens.json with new tokens..."
           echo "${{ toJson(github.event.client_payload) }}" > tokens/tokens.json
+
+      - name: Echo Client Payload
+        run: 'echo "${{ toJson(github.event.client_payload.tokens) }}"'
+
 
       - name: Run NPM Install 
         run: |

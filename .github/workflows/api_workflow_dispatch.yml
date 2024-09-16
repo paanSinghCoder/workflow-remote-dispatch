@@ -32,8 +32,8 @@ jobs:
 
       - name: Commit Changes
         run: |
-          git config --local user.email "action@github.com"
-          git config --local user.name "GitHub Action"
+          git config --local user.email "gaurav3017@gmail.com"
+          git config --local user.name "paanSinghCoder"
           git add tokens/tokens.json
           git commit -m "Update tokens from GitHub event payload" || echo "No changes to commit"
 

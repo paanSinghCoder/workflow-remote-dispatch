@@ -24,14 +24,10 @@ jobs:
           git checkout -b $BRANCH_NAME
           echo "Branch created: $BRANCH_NAME"
 
-      - name: Debug Tokens
-        run: |
-          echo "Tokens: ${{ toJson(github.event.client_payload.tokens) }}"
-
       - name: Update Tokens JSON
         run: |
           echo "Updating tokens/tokens.json with new tokens..."
-          jq --argjson newTokens "${{ toJson(github.event.client_payload.tokens) }}" \
+          jq --argjson newTokens "${{ toJson(github.event.client_payload) }}" \
              '.color += $newTokens.color' tokens/tokens.json > tokens/tokens.tmp.json && mv tokens/tokens.tmp.json tokens/tokens.json
 
       - name: Commit Changes

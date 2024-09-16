@@ -43,7 +43,6 @@ jobs:
 
       - name: Run NPM Install 
         run: |
-          npm install style-dictionary
           npm install
 
       - name: Run NPM Script

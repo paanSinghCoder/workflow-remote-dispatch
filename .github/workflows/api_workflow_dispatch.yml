@@ -9,12 +9,6 @@ jobs:
     name: Capture and Echo Payload
     runs-on: ubuntu-latest
     steps:
-      - name: Echo Event Type
-        run: 'echo "Event Type: ${{ github.event.action }}"'
-      
-      - name: Echo Client Payload
-        run: 'echo "Client Payload: ${{ toJson(github.event.client_payload) }}"'
-
       - name: Checkout Repository
         uses: actions/checkout@v2
 
@@ -29,7 +23,7 @@ jobs:
       - name: Update Tokens JSON
         run: |
           echo "Updating tokens/tokens.json with new tokens..."
-          echo "${{ toJson(github.event.client_payload.tokens) }}" | jq '.color += .color' tokens/tokens.json > tokens/tokens.tmp.json && mv tokens/tokens.tmp.json tokens/tokens.json
+          echo "${{ toJson(github.event.client_payload.tokens) }}" > tokens/tokens.json
 
       - name: Run NPM Script
         run: |

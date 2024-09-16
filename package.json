@@ -1,0 +1,14 @@
+{
+  "name": "workflow-remote-dispatch",
+  "version": "1.0.0",
+  "description": "## References: - [repository_dispatch event](https://docs.github.com/en/actions/writing-workflows/choosing-when-your-workflow-runs/events-that-trigger-workflows#repository_dispatch) - [API endpoint](https://docs.github.com/en/rest/repos/repos?apiVersion=2022-11-28#create-a-repository-dispatch-event)",
+  "main": "index.js",
+  "scripts": {
+    "gen:tokens": "npx style-dictionary build --config tokens-config.json"
+  },
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "style-dictionary": "^4.1.1"
+  }
+}

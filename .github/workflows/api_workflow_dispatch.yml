@@ -14,3 +14,37 @@ jobs:
       
       - name: Echo Client Payload
         run: 'echo "Client Payload: ${{ toJson(github.event.client_payload) }}"'
+
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Create Branch
+        run: |
+          BRANCH_NAME="update-tokens-${{ github.run_id }}"
+          git checkout -b $BRANCH_NAME
+          echo "Branch created: $BRANCH_NAME"
+
+      - name: Update Tokens JSON
+        run: |
+          echo "Updating tokens/tokens.json with new tokens..."
+          jq --argjson newTokens "${{ toJson(github.event.client_payload.tokens) }}" \
+             '.color += $newTokens.color' tokens/tokens.json > tokens/tokens.tmp.json && mv tokens/tokens.tmp.json tokens/tokens.json
+
+      - name: Commit Changes
+        run: |
+          git config --local user.email "action@github.com"
+          git config --local user.name "GitHub Action"
+          git add tokens/tokens.json
+          git commit -m "Update tokens from GitHub event payload" || echo "No changes to commit"
+
+      - name: Push Changes
+        run: |
+          git push origin HEAD
+
+      - name: Create Pull Request
+        uses: peter-evans/create-pull-request@v3
+        with:
+          title: "Update tokens from GitHub event payload"
+          body: "This PR updates the tokens based on the latest Figma payload."
+          head: ${{ github.head_ref }}
+          base: main  # Change this to your default branch if it's not 'main'

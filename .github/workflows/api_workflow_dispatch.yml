@@ -51,9 +51,14 @@ jobs:
           git push origin ${{ steps.create_branch.outputs.branch }}
 
       - name: Create Pull Request
+        id: create_pr
         uses: peter-evans/create-pull-request@v3
         with:
           title: "Update tokens from GitHub event payload"
           body: "This PR updates the tokens based on the latest Figma payload."
           head: ${{ steps.create_branch.outputs.branch }}  # Use the created branch
           base: main  # Change this to your default branch if it's not 'main'
+
+      - name: Check PR Creation
+        run: |
+          echo "PR creation status: ${{ steps.create_pr.outputs.pull_request_url }}"

@@ -26,7 +26,7 @@ jobs:
 
       - name: Debug Tokens
         run: |
-          echo "Tokens: ${{ toJson(github.event.client_payload) }}"
+          echo "${{ toJson(github.event.client_payload) }}"
 
       - name: Update Tokens JSON
         run: |

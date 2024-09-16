@@ -10,7 +10,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Echo Event Type
-        run: echo "Event Type: ${{ github.event.action }}"
+        run: 'echo "Event Type: ${{ github.event.action }}"'
       
       - name: Echo Client Payload
-        run: echo "Client Payload: ${{ toJson(github.event.client_payload) }}"
+        run: 'echo "Client Payload: ${{ toJson(github.event.client_payload) }}"'

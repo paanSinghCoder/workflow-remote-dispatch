@@ -1,8 +1,8 @@
-name: Capture Custom Payload
+name: Capture Custom Figma Payload
 
 on:
   repository_dispatch:
-    types: [update-tokens]
+    types: [update-figma-variables]
 
 jobs:
   capture_payload:

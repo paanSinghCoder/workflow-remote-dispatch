@@ -46,7 +46,6 @@ jobs:
         uses: actions/github-script@v6
         with:
           script: |
-            const { github, context } = require('@actions/github');
             const branch = '${{ steps.create_branch.outputs.branch }}';
             const title = 'Update tokens from GitHub event payload';
             const body = 'This PR updates the tokens based on the latest Figma payload.';

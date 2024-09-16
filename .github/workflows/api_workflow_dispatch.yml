@@ -43,9 +43,6 @@ jobs:
           git push origin ${{ steps.create_branch.outputs.branch }}
 
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v3
-        with:
-          title: "Update tokens from GitHub event payload"
-          body: "This PR updates the tokens based on the latest Figma payload."
-          head: ${{ steps.create_branch.outputs.branch }}
-          base: main
+        run: gh pr create -B main -H ${{ steps.create_branch.outputs.branch }} --title 'Merge ${{ steps.create_branch.outputs.branch }} into main' --body 'Created by Github action'
+        env:
+            GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}

@@ -33,7 +33,7 @@ jobs:
       - name: Run NPM Script
         run: |
           npm install
-          npm run gen:tokens
+          npx style-dictionary build --config tokens-config.json
 
       - name: Commit Changes
         run: |

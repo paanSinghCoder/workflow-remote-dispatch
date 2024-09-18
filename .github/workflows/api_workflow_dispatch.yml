@@ -9,8 +9,8 @@ jobs:
     name: Capture and Echo Payload
     runs-on: ubuntu-latest
     steps:
-      - name: Echo Event Type
-        run: 'echo "Event Type: ${{ github.event.action }}"'
+      # - name: Echo Event Type
+      #   run: 'echo "Event Type: ${{ github.event.action }}"'
       
       - name: Checkout Repository
         uses: actions/checkout@v2

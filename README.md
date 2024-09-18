@@ -7,3 +7,7 @@
 ## Usage
 - Run ./script.sh (with some change in the payload) to create a PR automatically.
 - curl in script.sh mimics the tokens export plugins in the Figma (eg: Design tokens).
+
+
+## Known issues
+- Currently the Github workflow dispatch API used in this repo doesn't support too big payload and throw 422. 
